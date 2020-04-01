@@ -51,6 +51,40 @@ def customer_delete(request, pk):
    return redirect('crm:customer_list')
 
 
+
+@login_required
+def product_list(request):
+    customer = Product.objects.filter()
+    return render(request, 'crm/product_list.html',
+                 {'products': customer})
+
+@login_required
+def product_edit(request, pk):
+   customer = get_object_or_404(Customer, pk=pk)
+   if request.method == "POST":
+       # update
+       form = CustomerForm(request.POST, instance=customer)
+       if form.is_valid():
+           customer = form.save(commit=False)
+           customer.updated_date = timezone.now()
+           customer.save()
+           customer = Product.objects.filter()
+           return render(request, 'crm/product_list.html',
+                         {'products': customer})
+   else:
+        # edit
+       form = ProductForm(instance=customer)
+   return render(request, 'crm/product_edit.html', {'form': form})
+
+@login_required
+def product_delete(request, pk):
+   customer = get_object_or_404(Product, pk=pk)
+   customer.delete()
+   return redirect('crm:product_list')
+
+
+
+
 def user_login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
