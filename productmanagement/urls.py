@@ -7,6 +7,7 @@ app_name = 'crm'
 urlpatterns = [
     path('', views.home, name='home'),
     re_path(r'^home/$', views.home, name='home'),
+    path('signup', views.signup, name='signup'),
     path('customer_list', views.customer_list, name='customer_list'),
     path('customer/<int:pk>/edit/', views.customer_edit, name='customer_edit'),
     path('customer/<int:pk>/delete/', views.customer_delete, name='customer_delete'),
@@ -19,7 +20,7 @@ urlpatterns = [
 # path('product/create/', views.product_new, name='product_new'),
 # path('product/<int:pk>/edit/', views.product_edit, name='product_edit'),
 # path('product/<int:pk>/delete/', views.product_delete, name='product_delete'),
-url('login/',auth_views.LoginView.as_view(), name='login'),
+path('login/',auth_views.LoginView.as_view(), name='login'),
     # url(r'^customers_json/', views.CustomerList.as_view()),
 ]
 urlpatterns = format_suffix_patterns(urlpatterns)
