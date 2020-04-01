@@ -1,0 +1,26 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+{% extends 'templates/crm/base.html' %}
+
+{% block content %}
+<h2>Sign up</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Sign up</button>
+</form>
+
+<script>
+    $(document).ready(function () {
+        var before = $('ul').html();
+        console.log(before);
+        $('ul').empty();
+        console.log($(before).text())
+        var res = $(before).text().split(".", 4);
+        var final = res[0] + "\n" + res[1] + "\n" + res[2] + "\n" + res[3]
+        console.log(final)
+        $('input').attr('title', final)
+        $('input').tooltip
+        $('label').css("width", "auto")
+    });
+</script>
+{% endblock %}
