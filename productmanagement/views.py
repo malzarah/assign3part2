@@ -36,7 +36,7 @@ def customer_edit(request, pk):
            customer = form.save(commit=False)
            customer.updated_date = timezone.now()
            customer.save()
-           customer = Customer.objects.filter(created_date__lte=timezone.now())
+           customer = Customer.objects.filter()
            return render(request, 'crm/customer_list.html',
                          {'customers': customer})
    else:
